@@ -72,7 +72,7 @@ public class ReCaptchaImpl implements ReCaptcha {
         }
         try {
             JSONObject json = new JSONObject(message);
-            boolean isSuccessful = json.getBoolean("status");
+            boolean isSuccessful = json.getBoolean("success");
 
             if (isSuccessful){
                 return new ReCaptchaResponse(true, null);
@@ -81,7 +81,7 @@ public class ReCaptchaImpl implements ReCaptcha {
             }
 
         }catch(Exception e){
-            return new ReCaptchaResponse(false, "recaptcha-not-valid");
+            return new ReCaptchaResponse(false, "recaptcha-not-valid: " + e);
         }
 
 	}
