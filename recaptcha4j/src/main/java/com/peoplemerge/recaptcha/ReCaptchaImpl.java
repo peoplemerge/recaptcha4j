@@ -21,6 +21,7 @@ import java.util.Properties;
 
 import com.peoplemerge.recaptcha.http.HttpLoader;
 import com.peoplemerge.recaptcha.http.SimpleHttpLoader;
+import org.json.JSONObject;
 
 public class ReCaptchaImpl implements ReCaptcha {
 
@@ -69,21 +70,24 @@ public class ReCaptchaImpl implements ReCaptcha {
         catch (ReCaptchaException networkProblem) {
             return new ReCaptchaResponse(false, "recaptcha-not-reachable");
         }
+        try {
+            JSONObject json = new JSONObject(message);
+            Object isSuccessfulObj = json.get("status");
 
-		String[] a = message.split("\r?\n");
-		if (a.length < 1) {
-			return new ReCaptchaResponse(false, "No answer returned from recaptcha: " + message);
-		}
-		boolean valid = "true".equals(a[0]);
-		String errorMessage = null;
-		if (!valid) {
-			if (a.length > 1)
-				errorMessage = a[1];
-			else
-				errorMessage = "recaptcha4j-missing-error-message";
-		}
-		
-		return new ReCaptchaResponse(valid, errorMessage);
+            if(! (isSuccessfulObj instanceof Boolean)){
+                return new ReCaptchaResponse(false, "recaptcha-not-valid");
+            }
+            boolean isSuccessful = (Boolean)isSuccessfulObj;
+            if (isSuccessful){
+                return new ReCaptchaResponse(true, null);
+            }else {
+                return new ReCaptchaResponse(false, json.get("error-codes").toString());
+            }
+
+        }catch(Exception e){
+            return new ReCaptchaResponse(false, "recaptcha-not-valid");
+        }
+        
 	}
 
     /**

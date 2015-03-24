@@ -26,7 +26,7 @@ public class ReCaptchaResponse {
 	}
 
 	/**
-	 * The reCaptcha error message. missing-input-secret invalid-input-secret missing-input-response invalid-input-response recaptcha-not-reachable
+	 * The reCaptcha error message. missing-input-secret invalid-input-secret missing-input-response invalid-input-response recaptcha-not-reachable recaptcha-not-valid
 	 * 
 	 * @return
 	 */
