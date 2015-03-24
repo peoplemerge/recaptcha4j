@@ -7,9 +7,9 @@
 
 	<!-- The Basics -->
 
-	<groupId>net.tanesha.recaptcha4j</groupId>
+	<groupId>net.peoplemerge.recaptcha4j</groupId>
 	<artifactId>recaptcha4j</artifactId>
-	<version>0.0.8</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -76,8 +76,8 @@
 
 	<name>ReCaptcha Java Library</name>
 	<description>ReCaptcha is a Java library for interfacing with
-		ReCaptcha.nets Captcha service</description>
-	<url>http://tanesha.net/projects/recaptcha4j/</url>
+        google.com/recaptcha Captcha service</description>
+	<url>https://github.com/peoplemerge/recaptcha4j</url>
 	<inceptionYear>2007</inceptionYear>
 
 	<licenses>
@@ -88,6 +88,16 @@
 	</licenses>
 
 	<developers>
+        <developer>
+            <id>peoplemerge</id>
+            <name>Dave Thomas</name>
+            <email>opensource@peoplemerge.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <organization>People Merge Engineering Services</organization>
+            <timezone>-8</timezone>
+        </developer>
 		<developer>
 			<id>sorend</id>
 			<name>Soren Davidsen</name>
@@ -115,14 +125,14 @@
 	<!-- Environment Settings -->
 
 	<issueManagement>
-		<system>Google Code</system>
-		<url>http://code.google.com/p/recaptcha4j/issues/list</url>
+		<system>Github Issues</system>
+		<url>https://github.com/peoplemerge/recaptcha4j/issues</url>
 	</issueManagement>
 
 	<scm>
-		<connection>scm:svn:http://recaptcha4j.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://recaptcha4j.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://code.google.com/p/recaptcha4j/source/browse/#svn/trunk/recaptcha4j</url>
+		<connection>scm:git:git@github.com:peoplemerge/recaptcha4j.git</connection>
+		<developerConnection>scm:git:git@github.com:peoplemerge/recaptcha4j.git</developerConnection>
+		<url>https://github.com/peoplemerge/recaptcha4j</url>
 	</scm>
 
 	<distributionManagement>

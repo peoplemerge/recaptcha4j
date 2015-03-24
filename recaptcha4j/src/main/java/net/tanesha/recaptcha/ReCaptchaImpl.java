@@ -28,15 +28,14 @@ public class ReCaptchaImpl implements ReCaptcha {
 	public static final String PROPERTY_THEME = "theme";
 	public static final String PROPERTY_TABINDEX = "tabindex";
 	
-	public static final String HTTP_SERVER = "http://www.google.com/recaptcha/api";
-	public static final String HTTPS_SERVER = "https://www.google.com/recaptcha/api";
-	public static final String VERIFY_URL = "http://www.google.com/recaptcha/api/verify";
+	public static final String HTTP_SERVER = "http://www.google.com/recaptcha";
+	public static final String HTTPS_SERVER = "https://www.google.com/recaptcha";
+	public static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 	
 	private String privateKey;
 	private String publicKey;
-	private String recaptchaServer = HTTP_SERVER;
+	private String recaptchaServer = HTTPS_SERVER;
     private String verifyUrl = VERIFY_URL;
-	private boolean includeNoscript = false;
 	private HttpLoader httpLoader = new SimpleHttpLoader();
 	
 	public void setPrivateKey(String privateKey) {
@@ -48,9 +47,6 @@ public class ReCaptchaImpl implements ReCaptcha {
 	public void setRecaptchaServer(String recaptchaServer) {
 		this.recaptchaServer = recaptchaServer;
 	}
-	public void setIncludeNoscript(boolean includeNoscript) {
-		this.includeNoscript = includeNoscript;
-	}
     public void setVerifyUrl(String verifyUrl) {
         this.verifyUrl = verifyUrl;
     }
@@ -58,10 +54,10 @@ public class ReCaptchaImpl implements ReCaptcha {
 		this.httpLoader  = httpLoader;
 	}
 
-	public ReCaptchaResponse checkAnswer(String remoteAddr, String challenge, String response) {
+	public ReCaptchaResponse checkAnswer(String remoteAddr, String response) {
 
-		String postParameters = "privatekey=" + URLEncoder.encode(privateKey) + "&remoteip=" + URLEncoder.encode(remoteAddr) +
-			"&challenge=" + URLEncoder.encode(challenge) + "&response=" + URLEncoder.encode(response);
+		String postParameters = "secret=" + URLEncoder.encode(privateKey) + "&remoteip=" + URLEncoder.encode(remoteAddr) +
+                "&response=" + URLEncoder.encode(response);
 
         final String message;
         try {
@@ -91,27 +87,34 @@ public class ReCaptchaImpl implements ReCaptcha {
 		return new ReCaptchaResponse(valid, errorMessage);
 	}
 
-	public String createRecaptchaHtml(String errorMessage, Properties options) {
+    /**
+     * Source: https://developers.google.com/recaptcha/docs/display
+     *
+     * @param errorMessage An errormessage to display in the captcha, null if none.
+     * @param options Options for rendering, <code>tabindex</code> and <code>theme</code> are currently supported by recaptcha. You can
+     *   put any options here though, and they will be added to the RecaptchaOptions javascript array.
+     * @return
+     */
+	public String createRecaptchaHtml(String errorMessage, Properties options) throws ReCaptchaException {
 
-		String errorPart = (errorMessage == null ? "" : "&amp;error=" + URLEncoder.encode(errorMessage));
-
-		String message = fetchJSOptions(options);
-
-		message += "<script type=\"text/javascript\" src=\"" + recaptchaServer + "/challenge?k=" + publicKey + errorPart + "\"></script>\r\n";
-
-		if (includeNoscript) {
-			String noscript = "<noscript>\r\n" + 
-					"	<iframe src=\""+recaptchaServer+"/noscript?k="+publicKey + errorPart + "\" height=\"300\" width=\"500\" frameborder=\"0\"></iframe><br/>\r\n" +
-					"	<textarea name=\"recaptcha_challenge_field\" rows=\"3\" cols=\"40\"></textarea>\r\n" + 
-					"	<input type=\"hidden\" name=\"recaptcha_response_field\" value=\"manual_challenge\"/>\r\n" + 
-					"</noscript>";
-			message += noscript;
-		}
+		throw new ReCaptchaException ("Not implemented yet. Pull requests welcome. https://developers.google.com/recaptcha/docs/display says this is as simple as: " +
+                "<html>\n" +
+                "  <head>\n" +
+                "     <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>\n" +
+                "  </head>\n" +
+                "  <body>\n" +
+                "    <form action=\"?\" method=\"POST\">\n" +
+                "      <div class=\"g-recaptcha\" data-sitekey=\""+publicKey +"\"></div>\n" +
+                "      <br/>\n" +
+                "      <input type=\"submit\" value=\"Submit\">\n" +
+                "    </form>\n" +
+                "  </body>\n" +
+                "</html>");
 		
-		return message;
+
 	}
 	
-	public String createRecaptchaHtml(String errorMessage, String theme, Integer tabindex) {
+	public String createRecaptchaHtml(String errorMessage, String theme, Integer tabindex) throws ReCaptchaException  {
 
 		Properties options = new Properties();
 

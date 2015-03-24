@@ -27,7 +27,7 @@ public interface ReCaptcha {
 	 *   put any options here though, and they will be added to the RecaptchaOptions javascript array.
 	 * @return
 	 */
-	public String createRecaptchaHtml(String errorMessage, Properties options);
+	public String createRecaptchaHtml(String errorMessage, Properties options) throws ReCaptchaException;
 
 	/**
 	 * Creates HTML output with embedded recaptcha. The string response should be output on a HTML page (eg. inside a JSP).
@@ -39,15 +39,15 @@ public interface ReCaptcha {
 	 * @param tabindex The tabindex to use for the recaptcha element (null if default)
 	 * @return
 	 */
-	public String createRecaptchaHtml(String errorMessage, String theme, Integer tabindex);
+	public String createRecaptchaHtml(String errorMessage, String theme, Integer tabindex) throws ReCaptchaException;
 	
 	/**
 	 * Validates a reCaptcha challenge and response.
-	 * 
+     * The 'challenge' param is not necessary in 2.0
+     *
 	 * @param remoteAddr The address of the user, eg. request.getRemoteAddr()
-	 * @param challenge The challenge from the reCaptcha form, this is usually request.getParameter("recaptcha_challenge_field") in your code.
 	 * @param response The response from the reCaptcha form, this is usually request.getParameter("recaptcha_response_field") in your code.
 	 * @return
 	 */
-	public ReCaptchaResponse checkAnswer(String remoteAddr, String challenge, String response); 
+	public ReCaptchaResponse checkAnswer(String remoteAddr, String response);
 }

@@ -17,18 +17,16 @@ package net.tanesha.recaptcha;
 
 public class ReCaptchaFactory {
 
-	public static ReCaptcha newReCaptcha(String publicKey, String privateKey, boolean includeNoscript) {
+	public static ReCaptcha newReCaptcha(String publicKey, String privateKey) {
 		ReCaptchaImpl recaptcha = new ReCaptchaImpl();
-		recaptcha.setIncludeNoscript(includeNoscript);
 		recaptcha.setPrivateKey(privateKey);
 		recaptcha.setPublicKey(publicKey);
 		recaptcha.setRecaptchaServer(ReCaptchaImpl.HTTP_SERVER);
 		return recaptcha;
 	}
 
-	public static ReCaptcha newSecureReCaptcha(String publicKey, String privateKey, boolean includeNoscript) {
+	public static ReCaptcha newSecureReCaptcha(String publicKey, String privateKey) {
 		ReCaptchaImpl recaptcha = new ReCaptchaImpl();
-		recaptcha.setIncludeNoscript(includeNoscript);
 		recaptcha.setPrivateKey(privateKey);
 		recaptcha.setPublicKey(publicKey);
 		recaptcha.setRecaptchaServer(ReCaptchaImpl.HTTPS_SERVER);

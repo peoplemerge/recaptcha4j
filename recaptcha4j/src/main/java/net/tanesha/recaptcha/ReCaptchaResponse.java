@@ -26,8 +26,7 @@ public class ReCaptchaResponse {
 	}
 
 	/**
-	 * The reCaptcha error message. invalid-site-public-key invalid-site-private-key invalid-request-cookie 
-	 * incorrect-captcha-sol verify-params-incorrect verify-params-incorrect recaptcha-not-reachable
+	 * The reCaptcha error message. missing-input-secret invalid-input-secret missing-input-response invalid-input-response recaptcha-not-reachable
 	 * 
 	 * @return
 	 */
