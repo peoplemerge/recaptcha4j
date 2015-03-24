@@ -1,4 +1,4 @@
-package net.tanesha.recaptcha.http;
+package com.peoplemerge.recaptcha.http;
 
 import junit.framework.TestCase;
 

@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tanesha.recaptcha;
+package com.peoplemerge.recaptcha;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import net.tanesha.recaptcha.http.HttpLoader;
-import net.tanesha.recaptcha.http.SimpleHttpLoader;
+import com.peoplemerge.recaptcha.http.HttpLoader;
+import com.peoplemerge.recaptcha.http.SimpleHttpLoader;
 
 public class ReCaptchaImpl implements ReCaptcha {
 

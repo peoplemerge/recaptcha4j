@@ -1,4 +1,4 @@
-package net.tanesha.recaptcha.http;
+package com.peoplemerge.recaptcha.http;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLConnection;
 
-import net.tanesha.recaptcha.ReCaptchaException;
+import com.peoplemerge.recaptcha.ReCaptchaException;
 
 public class SimpleHttpLoader implements HttpLoader {
 

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tanesha.recaptcha;
+package com.peoplemerge.recaptcha;
 
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
 
-import net.tanesha.recaptcha.http.HttpLoader;
+import com.peoplemerge.recaptcha.http.HttpLoader;
 import junit.framework.TestCase;
 import org.w3c.dom.Document;
 
